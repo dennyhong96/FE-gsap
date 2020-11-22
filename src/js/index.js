@@ -58,7 +58,8 @@ gsap.from(".nav--closed li", {
 
 // Pause when first load
 // Start at reversed so we can use `toggleTimeline`
-const tl = gsap.timeline({ paused: true, reversed: true });
+// Put common properties inside `defaults`
+const tl = gsap.timeline({ paused: true, reversed: true, defaults: {} });
 
 tl.to(".cover", {
   width: "60%",
@@ -83,9 +84,8 @@ tl.to(".cover", {
       ease: "Power2.easeOut",
       duration: 1,
     },
-    "-=0.5" // Timing offset
+    "-=0.5" // Timing delay: relative delay: "+=1", absolute delay: 1
   )
-
   .fromTo(
     ".nav--open",
     {
@@ -127,5 +127,13 @@ navButton.addEventListener("click", function () {
 
 // Play animation in order / reversed order
 function toggleTimeline(tl) {
-  tl.reversed() ? tl.play() : tl.reverse();
+  // tl.reversed() ? tl.play() : tl.reverse();
+
+  if (tl.reversed()) {
+    tl.timeScale(1); // Back to normal speed
+    tl.play();
+  } else {
+    tl.timeScale(1.5); // Speedup the reverse
+    tl.reverse();
+  }
 }
