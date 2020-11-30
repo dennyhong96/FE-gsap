@@ -7,7 +7,7 @@ import "regenerator-runtime";
 import "../sass/main.scss";
 import fullSizeSrc from "../img/long-cover.jpg";
 
-// Inject Date
+// Inject Date.
 const int = new Intl.DateTimeFormat("en-US", {
   day: "numeric",
   month: "short",
